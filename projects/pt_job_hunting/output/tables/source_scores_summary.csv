@@ -1,0 +1,15 @@
+source,Median,Q1,Q3,IQR,Category
+imp_cl_prac,NA,NA,NA,NA-NA,重要度
+imp_event,NA,NA,NA,NA-NA,重要度
+imp_friends,NA,NA,NA,NA-NA,重要度
+imp_hp,NA,NA,NA,NA-NA,重要度
+imp_school,NA,NA,NA,NA-NA,重要度
+imp_site,NA,NA,NA,NA-NA,重要度
+imp_sns,NA,NA,NA,NA-NA,重要度
+use_cl_prac,NA,NA,NA,NA-NA,利用度
+use_event,NA,NA,NA,NA-NA,利用度
+use_friends,NA,NA,NA,NA-NA,利用度
+use_hp,NA,NA,NA,NA-NA,利用度
+use_school,NA,NA,NA,NA-NA,利用度
+use_site,NA,NA,NA,NA-NA,利用度
+use_sns,NA,NA,NA,NA-NA,利用度

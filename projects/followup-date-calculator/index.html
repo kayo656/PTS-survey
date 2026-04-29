@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォローアップ日程計算機 | 臨床研究ツール</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>フォローアップ日程計算機</h1>
+            <p class="subtitle">臨床研究・疫学調査のフォローアップ予定日を素早く算出します</p>
+        </header>
+
+        <section class="input-section">
+            <div class="input-group">
+                <label for="startDate">基準日（開始日）を選択してください</label>
+                <input type="date" id="startDate" class="date-picker">
+            </div>
+        </section>
+
+        <section class="results-grid" id="results">
+            <!-- 60 Days -->
+            <div class="card" data-days="60">
+                <div class="card-header">
+                    <span class="days-label">60日後</span>
+                    <span class="approx-months">（約2ヶ月）</span>
+                </div>
+                <div class="date-display">
+                    <span class="calc-date">----/--/--</span>
+                    <span class="day-of-week">(-)</span>
+                </div>
+                <button class="btn-calendar" onclick="downloadICS(60)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                    カレンダーに追加
+                </button>
+            </div>
+
+            <!-- 90 Days -->
+            <div class="card" data-days="90">
+                <div class="card-header">
+                    <span class="days-label">90日後</span>
+                    <span class="approx-months">（約3ヶ月）</span>
+                </div>
+                <div class="date-display">
+                    <span class="calc-date">----/--/--</span>
+                    <span class="day-of-week">(-)</span>
+                </div>
+                <button class="btn-calendar" onclick="downloadICS(90)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                    カレンダーに追加
+                </button>
+            </div>
+
+            <!-- 150 Days -->
+            <div class="card" data-days="150">
+                <div class="card-header">
+                    <span class="days-label">150日後</span>
+                    <span class="approx-months">（約5ヶ月）</span>
+                </div>
+                <div class="date-display">
+                    <span class="calc-date">----/--/--</span>
+                    <span class="day-of-week">(-)</span>
+                </div>
+                <button class="btn-calendar" onclick="downloadICS(150)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                    カレンダーに追加
+                </button>
+            </div>
+
+            <!-- 180 Days -->
+            <div class="card" data-days="180">
+                <div class="card-header">
+                    <span class="days-label">180日後</span>
+                    <span class="approx-months">（約6ヶ月）</span>
+                </div>
+                <div class="date-display">
+                    <span class="calc-date">----/--/--</span>
+                    <span class="day-of-week">(-)</span>
+                </div>
+                <button class="btn-calendar" onclick="downloadICS(180)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                    カレンダーに追加
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Clinical Research Environment. 全ての日程は開始日を含まない「～日後」として計算されます。</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
