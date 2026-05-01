@@ -1,0 +1,143 @@
+---
+title: "理学療法士養成課程学生の就職活動調査：解析結果報告書"
+author: "kayo656"
+date: "`r Sys.Date()`"
+output:
+  word_document:
+    toc: true
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(readxl)
+library(rstatix)
+library(PMCMRplus) # Nemenyi検定用
+library(knitr)
+
+# パスの設定
+base_path <- "C:/Users/lotta/OneDrive/Desktop/r-environment-for-researcher/projects/pt_job_hunting"
+raw_file <- "C:/Users/lotta/OneDrive/Desktop/r-environment-for-researcher/回答生データ.xlsx"
+
+# データの読み込みとクレンジング
+raw_data <- read_excel(raw_file)
+
+# 数字抽出用
+extract_num <- function(x) {
+  x <- as.character(x)
+  num <- str_extract(chartr("１２３４５６", "123456", x), "[1-6]")
+  as.integer(num)
+}
+
+df_clean <- raw_data %>%
+  filter(str_detect(.[[2]], "同意する")) %>%
+  mutate(
+    gender = .[[3]],
+    sns_time = .[[5]],
+    # 重要度(imp)
+    imp_school = extract_num(.[[6]]),  imp_cl_prac = extract_num(.[[7]]),
+    imp_friends = extract_num(.[[8]]), imp_hp = extract_num(.[[9]]),
+    imp_site = extract_num(.[[10]]),   imp_event = extract_num(.[[11]]),
+    imp_sns = extract_num(.[[12]]),
+    # 利用頻度(use)
+    use_school = extract_num(.[[13]]), use_cl_prac = extract_num(.[[14]]),
+    use_friends = extract_num(.[[15]]),use_hp = extract_num(.[[16]]),
+    use_site = extract_num(.[[17]]),   use_event = extract_num(.[[18]]),
+    use_sns = extract_num(.[[19]])
+  )
+```
+
+## 1. 対象者の属性情報
+解析対象者（n = `r nrow(df_clean)`名）の属性情報です。
+
+### 1.1 性別
+```{r gender}
+df_clean %>%
+  count(gender) %>%
+  mutate(割合 = n / sum(n) * 100) %>%
+  kable(digits = 1, col.names = c("性別", "度数(n)", "割合(%)"))
+```
+
+### 1.2 SNS利用時間
+```{r sns}
+df_clean %>%
+  count(sns_time) %>%
+  mutate(割合 = n / sum(n) * 100) %>%
+  kable(digits = 1, col.names = c("SNS利用時間", "度数(n)", "割合(%)"))
+```
+
+## 2. 主要アウトカム：各情報源の重要度
+### 2.1 記述統計（中央値・IQR）
+```{r imp_summary}
+summary_imp <- df_clean %>%
+  select(starts_with("imp_")) %>%
+  pivot_longer(everything(), names_to = "項目", values_to = "score") %>%
+  group_by(項目) %>%
+  summarise(
+    Median = median(score, na.rm = TRUE),
+    Q1 = quantile(score, 0.25, na.rm = TRUE),
+    Q3 = quantile(score, 0.75, na.rm = TRUE)
+  )
+kable(summary_imp, caption = "重要度の中央値と四分位範囲")
+```
+
+### 2.2 統計検定（Friedman検定 & Nemenyi検定）
+```{r imp_stat}
+df_imp_long <- df_clean %>%
+  select(starts_with("imp_")) %>%
+  drop_na() %>%
+  mutate(id = row_number()) %>%
+  pivot_longer(-id, names_to = "source", values_to = "score")
+
+# Friedman
+res_f_imp <- friedman.test(score ~ source | id, data = df_imp_long)
+print(res_f_imp)
+
+# Nemenyi (有意差がある場合)
+if(res_f_imp$p.value < 0.05) {
+  cat("\n--- Nemenyi事後検定の結果 ---\n")
+  res_n_imp <- frdAllPairsNemenyiTest(score ~ source | id, data = df_imp_long)
+  print(res_n_imp)
+}
+```
+
+## 3. 副次アウトカム：各情報源の利用頻度
+### 3.1 記述統計（中央値・IQR）
+```{r use_summary}
+summary_use <- df_clean %>%
+  select(starts_with("use_")) %>%
+  pivot_longer(everything(), names_to = "項目", values_to = "score") %>%
+  group_by(項目) %>%
+  summarise(
+    Median = median(score, na.rm = TRUE),
+    Q1 = quantile(score, 0.25, na.rm = TRUE),
+    Q3 = quantile(score, 0.75, na.rm = TRUE)
+  )
+kable(summary_use, caption = "利用頻度の中央値と四分位範囲")
+```
+
+### 3.2 統計検定（Friedman検定 & Nemenyi検定）
+```{r use_stat}
+df_use_long <- df_clean %>%
+  select(starts_with("use_")) %>%
+  drop_na() %>%
+  mutate(id = row_number()) %>%
+  pivot_longer(-id, names_to = "source", values_to = "score")
+
+# Friedman
+res_f_use <- friedman.test(score ~ source | id, data = df_use_long)
+print(res_f_use)
+
+# Nemenyi (有意差がある場合)
+if(res_f_use$p.value < 0.05) {
+  cat("\n--- Nemenyi事後検定の結果 ---\n")
+  res_n_use <- frdAllPairsNemenyiTest(score ~ source | id, data = df_use_long)
+  print(res_n_use)
+}
+```
+
+---
+*Generated based on the Statistical Analysis Plan (SAP)*

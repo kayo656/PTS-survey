@@ -1,0 +1,257 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={PT学生就職活動調査：解析全行程レポート},
+  pdfauthor={Antigravity \& kayo656},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{PT学生就職活動調査：解析全行程レポート}
+\author{Antigravity \& kayo656}
+\date{2026-04-30}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\subsection{1. はじめに}\label{ux306fux3058ux3081ux306b}
+
+本レポートは、理学療法士養成課程学生を対象とした「就職活動の情報収集手段」に関する調査結果をまとめたものです。
+解析は、データのクレンジング、記述統計、および推計統計（フリードマン検定）の3段階で行われました。
+
+\subsection{2.
+データクレンジング（下準備）}\label{ux30c7ux30fcux30bfux30afux30ecux30f3ux30b8ux30f3ux30b0ux4e0bux6e96ux5099}
+
+生データには「4＝重要」のような文字混じりの回答や、全角数字が含まれていました。これらを統計解析が可能な「数値」に変換する処理を行いました。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 数字抽出用の関数}
+\NormalTok{extract\_num }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(x)}
+\NormalTok{  num }\OtherTok{\textless{}{-}} \FunctionTok{str\_extract}\NormalTok{(}\FunctionTok{chartr}\NormalTok{(}\StringTok{"１２３４５６"}\NormalTok{, }\StringTok{"123456"}\NormalTok{, x), }\StringTok{"[1{-}6]"}\NormalTok{)}
+  \FunctionTok{as.integer}\NormalTok{(num)}
+\NormalTok{\}}
+
+\CommentTok{\# データの読み込みと変換}
+\NormalTok{raw\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(raw\_file)}
+\NormalTok{df\_clean }\OtherTok{\textless{}{-}}\NormalTok{ raw\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(.[[}\DecValTok{2}\NormalTok{]], }\StringTok{"同意する"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \CommentTok{\# 重要度(imp)と利用度(use)を数値化}
+    \AttributeTok{imp\_school =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{6}\NormalTok{]]),  }\AttributeTok{imp\_cl\_prac =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{7}\NormalTok{]]),}
+    \AttributeTok{imp\_friends =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{8}\NormalTok{]]), }\AttributeTok{imp\_hp =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{9}\NormalTok{]]),}
+    \AttributeTok{imp\_site =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{10}\NormalTok{]]),   }\AttributeTok{imp\_event =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{11}\NormalTok{]]),}
+    \AttributeTok{imp\_sns =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{12}\NormalTok{]]),}
+    \AttributeTok{use\_school =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{13}\NormalTok{]]), }\AttributeTok{use\_cl\_prac =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{14}\NormalTok{]]),}
+    \AttributeTok{use\_friends =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{15}\NormalTok{]]),}\AttributeTok{use\_hp =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{16}\NormalTok{]]),}
+    \AttributeTok{use\_site =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{17}\NormalTok{]]),   }\AttributeTok{use\_event =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{18}\NormalTok{]]),}
+    \AttributeTok{use\_sns =} \FunctionTok{extract\_num}\NormalTok{(.[[}\DecValTok{19}\NormalTok{]])}
+\NormalTok{  )}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"有効回答数:"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df\_clean), }\StringTok{"名"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 有効回答数: 85 名
+\end{verbatim}
+
+\subsection{3.
+記述統計（現状の把握）}\label{ux8a18ux8ff0ux7d71ux8a08ux73feux72b6ux306eux628aux63e1}
+
+各情報源の重要度について、中央値と四分位範囲（IQR）を算出しました。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{summary\_table }\OtherTok{\textless{}{-}}\NormalTok{ df\_clean }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"imp\_"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), }\AttributeTok{names\_to =} \StringTok{"項目"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"score"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(項目) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+\NormalTok{    中央値 }\OtherTok{=} \FunctionTok{median}\NormalTok{(score, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+\NormalTok{    第1四分位数 }\OtherTok{=} \FunctionTok{quantile}\NormalTok{(score, }\FloatTok{0.25}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+\NormalTok{    第3四分位数 }\OtherTok{=} \FunctionTok{quantile}\NormalTok{(score, }\FloatTok{0.75}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\FunctionTok{kable}\NormalTok{(summary\_table, }\AttributeTok{caption =} \StringTok{"重要度の要約統計量"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{bootstrap\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hover"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrrr}
+\caption{\label{tab:summary_stats}重要度の要約統計量}\\
+\toprule
+項目        | & 央値| 第1四 & 位数| 第3四分位数| & \\
+\midrule
+imp\_cl\_prac & 5 & 4 & 6\\
+imp\_event & 5 & 4 & 6\\
+imp\_friends & 5 & 4 & 5\\
+imp\_hp & 5 & 4 & 6\\
+imp\_school & 5 & 4 & 5\\
+\addlinespace
+imp\_site & 4 & 3 & 5\\
+imp\_sns & 4 & 3 & 4\\
+\bottomrule
+\end{longtable}
+
+\subsection{4.
+統計検定（差の証明）}\label{ux7d71ux8a08ux691cux5b9aux5deeux306eux8a3cux660e}
+
+「7つの情報源の間で、重要度に有意な差があるか」をフリードマン検定で検証しました。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データの整形}
+\NormalTok{df\_long }\OtherTok{\textless{}{-}}\NormalTok{ df\_clean }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"imp\_"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id =} \FunctionTok{row\_number}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{id, }\AttributeTok{names\_to =} \StringTok{"source"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"score"}\NormalTok{)}
+
+\CommentTok{\# フリードマン検定の実行}
+\NormalTok{res\_friedman }\OtherTok{\textless{}{-}}\NormalTok{ df\_long }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{friedman\_test}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ source }\SpecialCharTok{|}\NormalTok{ id)}
+
+\FunctionTok{kable}\NormalTok{(res\_friedman, }\AttributeTok{caption =} \StringTok{"フリードマン検定結果"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrrrrl}
+\caption{\label{tab:friedman_test}フリードマン検定結果}\\
+\toprule
+.y. & n & statistic & df & p & method\\
+\midrule
+score & 85 & 107.7624 & 6 & 0 & Friedman test\\
+\bottomrule
+\end{longtable}
+
+\subsubsection{考察}\label{ux8003ux5bdf}
+
+p値が 0.05
+未満（非常に小さい値）であることから、学生が重視する情報源には\textbf{統計的に極めて有意な差がある}ことが証明されました。
+
+\subsection{5. おわりに}\label{ux304aux308fux308aux306b}
+
+本解析により、単なる平均の比較ではなく、ノンパラメトリック検定を用いた厳密な手法で、情報収集手段の重要度の違いを明らかにすることができました。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Generated by Antigravity AI Data Analyst}
+
+\end{document}
